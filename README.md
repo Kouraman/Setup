@@ -57,7 +57,10 @@ Check if UTF-8 encoding work properly
 ```shell script
 cmd /c %ConEmuDir%\ConEmu\Addons\utf-8-test.cmd
 ```
-
+#####Verify LN Line separator
+If IntelliJ dont use LF line separator, configure it  
+Settings &#8594; Code Style &#8594; Line Separator : ``Unix and MacOs``
+![image info](./src/IntelliJLineSeparator.png)
 ## 5 : Git
 
 Git bash is already installed by Cmder, you only need to add your credentials.  
@@ -67,10 +70,9 @@ They will be required only on first connection.
  git clone https://github.com/Kouraman/Setup.git
  ```
 
-Since Windows use CRLF line ending and Unix-based systems use LF, you should 
-let git handle the issue with the following command : 
+LF line separator should be activated, then, ask git to convert any crlf to lf line separator automatically
 ```
-git config --global core.autocrlf true
+git config --global core.autocrlf input
 ```
 
 ## 6 : Docker
