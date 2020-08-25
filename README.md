@@ -9,19 +9,44 @@ Create a environment variable for access the directory
 setx REPO_DIR "C:\Users\nicob\Desktop\Project"
 ```
 
+##2 Install Chocolatey
+
+[Chocolatey](https://chocolatey.org/install)
+
+Allow AutoConfirmation
+```
+choco feature enable -n allowGlobalConfirmation
+```
+
 ## 2 : KeePass (Pwd Manager)
 [Download KeePass](https://keepass.info/download.html)  
 [Add plugin](https://keeanywhere.de/) for cloud storage, drop it in KeyPass/Plugin Folder   
 
-If running default configuration :
-```shell script
-cd %userprofile%\Downloads
-cp {KeeAnywhere}* C:\Program Files (x86)\KeePass Password Safe 2\Plugins
-```  
+```
+choco install keepass &&
+choco install keepass-plugin-keeanywhere
+```
 
 On first us, you will to configure your cloud access
 ![image info](./src/KeePassFirstOpening.png)
 
+## 3 : Java
+
+[Download JDK 8 for Windows 10](https://www.oracle.com/fr/java/technologies/javase/javase-jdk8-downloads.html#license-lightbox)
+```
+choco install jdk8
+choco install jdk11
+refreshenv
+```
+##7 Maven
+[Download Maven for Windows](https://mirroir.wptheme.fr/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip)
+
+https://mkyong.com/maven/how-to-install-maven-in-windows/
+
+```
+choco install maven
+```
+https://mkyong.com/maven/how-to-install-maven-in-windows/
 
 ## 3 :  Cmder (Terminal)
 
@@ -38,7 +63,9 @@ setx ConEmuDir "%appdata%\cmder\vendor\conemu-maximus5"
 
 ## 4 :  IntelliJ 
 
-[Install IntelliJ Ultimate](https://www.jetbrains.com/fr-fr/idea/download/#section=windows)
+```
+choco install intellijidea-ultimate
+```
 _____
 ###Configure Terminal 
 
@@ -63,6 +90,10 @@ Settings &#8594; Code Style &#8594; Line Separator : ``Unix and MacOs``
 ![image info](./src/IntelliJLineSeparator.png)
 ## 5 : Git
 
+```
+choco install git -params '"/GitAndUnixToolsOnPath"'
+```
+
 Git bash is already installed by Cmder, you only need to add your credentials.  
 They will be required only on first connection.
 
@@ -78,3 +109,10 @@ git config --global core.autocrlf input
 ## 6 : Docker
 
 [Download Link](https://www.docker.com/get-started)
+
+##7 Maven
+
+
+##Add to path
+
+https://cat.pdx.edu/platforms/windows/user-environment/edit-path-variable-in-win-10/
