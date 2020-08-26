@@ -34,7 +34,7 @@ echo install Classic Software
 
 choco install googlechrome
 choco install qbittorrent
-choco install --params "/Language:fr"
+choco install --params "/Language:fr" vlc
 
 
 ::echo Install KeePass
