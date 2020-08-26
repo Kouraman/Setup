@@ -24,38 +24,101 @@ if '%errorlevel%' NEQ '0' (
     CD /D "%~dp0"
 :--------------------------------------
 
+set repoDirectory="%UserProfile%\Desktop\Info"
+set cmderRoot="C:\tools\Cmder"
+set conemuDir="C:\tools\Cmder\vendor\conemu-maximus5"
+set configDir="%REPO_DIR%\Setup\src\config"
+
+set timeoutValue=10
+
 if not exist %UserProfile%\Desktop\Info (
-    mkdir %UserProfile%\Desktop\Info
-    setx REPO_DIR "%UserProfile%\Desktop\Info"
     echo Creation du dossier Info
+    mkdir %UserProfile%\Desktop\Info
+    setx REPO_DIR %repoDirectory%
+
 )
+choco feature enable -n allowGlobalConfirmation
 
-echo install Classic Software
-
+echo Install Classic Software
 choco install googlechrome
 choco install qbittorrent
 choco install --params "/Language:fr" vlc
 
+echo.
+echo Classic Software installed
+timeout %timeoutValue% && cls
 
-::echo Install KeePass
+::------------------------------
 
-choco install keepass &&
-choco install keepass-plugin-keeanywhere
+echo Install PasswordManager
+choco install keepass && choco install keepass-plugin-keeanywhere
 
-choco install microsoft-windows-terminal
+echo.
+echo PasswordManager installed
+timeout %timeoutValue% && cls
 
-cmchoco install jdk8
-refreshenv
+::------------------------------
 
-choco install maven
-refreshenv
+echo Install and Configure Windows Terminal
+choco install microsoft-windows-terminal cmder
+setx CMDER_ROOT %cmderRoot%
+setx ConEmuDir %conemuDir%
 
-choco install intellijidea-ultimate
+::Copy the Windows Terminal configuration into the right location
+cd %UserProfile%\AppData\Local\Packages\Microsoft.WindowsTerminal*\
+cp %configDir%\terminal\settings.json LocalState
+cd %UserProfile%
 
-choco install git
-refreshenv
+echo.
+echo Windows Terminal installed
+timeout %timeoutValue% && cls
+
+::------------------------------
+
+echo Install Git,UnixCLI and AWS CLI and configure it
+choco install git -params '"/GitAndUnixToolsOnPath"'
+choco install awscli
+call RefreshEnv.cmd
 git config --global core.autocrlf input
 
-choco install docker-desktop
+echo.
+echo Git,UnixCLI and AWS CLI installed
+timeout %timeoutValue% && cls
 
+::------------------------------
+
+echo Install Java environments
+choco install jdk8
+call RefreshEnv.cmd
+choco install maven
+call RefreshEnv.cmd
+
+echo.
+echo Java environments installed
+timeout %timeoutValue% && cls
+
+::------------------------------
+
+echo Install IDEs
+choco install intellijidea-ultimate
+choco install notepadplusplus
+
+echo.
+echo IDEs installed
+timeout %timeoutValue% && cls
+
+::------------------------------
+
+echo Install Docker
+choco install docker-desktop
+call RefreshEnv.cmd
+
+echo.
+echo Docker installed
+timeout %timeoutValue% && cls
+
+::------------------------------
+
+echo Every Soft you need should be installed and configured, thanks for using!
 pause
+

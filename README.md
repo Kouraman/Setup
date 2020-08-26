@@ -62,8 +62,8 @@ Unpack in %appdata% directory
 #####Setup Env var
 
 ```shell script
-setx CMDER_ROOT "%appdata%\cmder"
-setx ConEmuDir "%appdata%\cmder\vendor\conemu-maximus5"
+setx CMDER_ROOT "C:\tools\Cmder"
+setx ConEmuDir "C:\tools\Cmder\vendor\conemu-maximus5"
 ```
 
 ## 4 :  IntelliJ 
