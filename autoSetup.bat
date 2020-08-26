@@ -37,12 +37,14 @@ choco install qbittorrent
 choco install --params "/Language:fr"
 
 
-echo Install KeePass
+::echo Install KeePass
 
 choco install keepass &&
 choco install keepass-plugin-keeanywhere
 
-choco install jdk8
+choco install microsoft-windows-terminal
+
+cmchoco install jdk8
 refreshenv
 
 choco install maven
@@ -54,6 +56,6 @@ choco install git
 refreshenv
 git config --global core.autocrlf input
 
-choco upgrade docker-desktop
+choco install docker-desktop
 
 pause
