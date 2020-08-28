@@ -24,20 +24,39 @@ if '%errorlevel%' NEQ '0' (
     CD /D "%~dp0"
 :--------------------------------------
 
+::------------------------------  Variables
+
 set repoDirectory="%UserProfile%\Desktop\Info"
 set cmderRoot="C:\tools\Cmder"
 set conemuDir="C:\tools\Cmder\vendor\conemu-maximus5"
-set configDir="%REPO_DIR%\Setup\src\config"
+set configDir="%UserProfile%\Desktop\Info\Setup\src\config"
 
 set timeoutValue=10
+
+::------------------------------ Configs
+echo To work, the script require git credentials to download settings files
+echo.
+
+set /p username="Git Username : "
+set /p pwd="Git Pwd : "
+
+echo.
+echo Parametring done, installation will start
+timeout %timeoutValue% && cls
+
+::------------------------------ Configs
+
+choco feature enable -n allowGlobalConfirmation
+
+::------------------------------ Info Project Folder
 
 if not exist %UserProfile%\Desktop\Info (
     echo Creation du dossier Info
     mkdir %UserProfile%\Desktop\Info
-    setx REPO_DIR %repoDirectory%
-
 )
-choco feature enable -n allowGlobalConfirmation
+setx REPO_DIR %repoDirectory%
+
+::------------------------------ Classic Soft
 
 echo Install Classic Software
 choco install googlechrome
@@ -48,7 +67,7 @@ echo.
 echo Classic Software installed
 timeout %timeoutValue% && cls
 
-::------------------------------
+::------------------------------ Pwd Manager
 
 echo Install PasswordManager
 choco install keepass && choco install keepass-plugin-keeanywhere
@@ -57,23 +76,8 @@ echo.
 echo PasswordManager installed
 timeout %timeoutValue% && cls
 
-::------------------------------
+::------------------------------ Cli : Git, UnixCLI, AWS
 
-echo Install and Configure Windows Terminal
-choco install microsoft-windows-terminal cmder
-setx CMDER_ROOT %cmderRoot%
-setx ConEmuDir %conemuDir%
-
-::Copy the Windows Terminal configuration into the right location
-cd %UserProfile%\AppData\Local\Packages\Microsoft.WindowsTerminal*\
-cp %configDir%\terminal\settings.json LocalState
-cd %UserProfile%
-
-echo.
-echo Windows Terminal installed
-timeout %timeoutValue% && cls
-
-::------------------------------
 
 echo Install Git,UnixCLI and AWS CLI and configure it
 choco install git -params '"/GitAndUnixToolsOnPath"'
@@ -85,7 +89,32 @@ echo.
 echo Git,UnixCLI and AWS CLI installed
 timeout %timeoutValue% && cls
 
-::------------------------------
+:: Get settings for git
+
+cd %REPO_DIR%
+git clone https://%username%:%pwd%@github.com/Kouraman/Setup.git
+
+::------------------------------ Terminals
+
+echo Install and Configure Windows Terminal
+choco install microsoft-windows-terminal cmder
+setx CMDER_ROOT %cmderRoot%
+setx ConEmuDir %conemuDir%
+
+echo Delete git from cmder
+rm -rf %CMDER_ROOT%\vendor\git-for-windows
+
+::Copy the Windows Terminal configuration into the right location
+
+cd %UserProfile%\AppData\Local\Packages\Microsoft.WindowsTerminal*\
+cp -f %configDir%\terminal\settings.json LocalState
+cd %UserProfile%
+
+echo.
+echo Windows Terminal installed
+timeout %timeoutValue% && cls
+
+::------------------------------ Java & Maven
 
 echo Install Java environments
 choco install jdk8
@@ -97,7 +126,7 @@ echo.
 echo Java environments installed
 timeout %timeoutValue% && cls
 
-::------------------------------
+::------------------------------ IDEs
 
 echo Install IDEs
 choco install intellijidea-ultimate
@@ -107,7 +136,7 @@ echo.
 echo IDEs installed
 timeout %timeoutValue% && cls
 
-::------------------------------
+::------------------------------ Docker
 
 echo Install Docker
 choco install docker-desktop
@@ -117,7 +146,7 @@ echo.
 echo Docker installed
 timeout %timeoutValue% && cls
 
-::------------------------------
+::------------------------------ End
 
 echo Every Soft you need should be installed and configured, thanks for using!
 pause
