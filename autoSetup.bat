@@ -76,6 +76,16 @@ echo.
 echo PasswordManager installed
 timeout %timeoutValue% && cls
 
+::------------------------------ Database Client
+
+echo Install DatabaseClient
+
+choco install sqlyog
+
+echo.
+echo DatabaseClient installed
+timeout %timeoutValue% && cls
+
 ::------------------------------ Cli : Git, UnixCLI, AWS
 
 
