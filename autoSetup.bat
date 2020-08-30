@@ -156,6 +156,15 @@ echo.
 echo Docker installed
 timeout %timeoutValue% && cls
 
+::------------------------------ Various Soft
+
+echo Install Postman
+choco install postman
+
+echo.
+echo Postman installed
+timeout %timeoutValue% && cls
+
 ::------------------------------ End
 
 echo Every Soft you need should be installed and configured, thanks for using!
