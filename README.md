@@ -43,3 +43,14 @@ cmd /c %ConEmuDir%\ConEmu\Addons\utf-8-test.cmd
 If IntelliJ dont use LF line separator, configure it  
 Settings &#8594; Code Style &#8594; Line Separator : ``Unix and MacOs``
 ![image info](./src/IntelliJLineSeparator.png)
+
+###Configure Docker
+
+Docker need some additional component to work
+
+Need to elevate the powershell Terminal to run
+```powershell
+Enable-WindowsOptionalFeature -Online -FeatureName $("VirtualMachinePlatform", "Microsoft-Windows-Subsystem-Linux")
+```
+
+Now [complete the WLS installation](https://aka.ms/wsl2kernel)
