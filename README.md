@@ -53,4 +53,11 @@ Need to elevate the powershell Terminal to run
 Enable-WindowsOptionalFeature -Online -FeatureName $("VirtualMachinePlatform", "Microsoft-Windows-Subsystem-Linux")
 ```
 
-Now [complete the WLS installation](https://aka.ms/wsl2kernel)
+Now [complete the WLS installation](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
+
+
+###Start New React App
+```shell
+yarn create react-app MY_PROJECT --template typescript
+yarn add @material-ui/core
+```

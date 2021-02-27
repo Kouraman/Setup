@@ -136,6 +136,12 @@ echo.
 echo Java environments installed
 timeout %timeoutValue% && cls
 
+echo Install Yarn and Node
+choco install yarn
+call RefreshEnv.cmd
+choco install nodejs
+call RefreshEnv.cmd
+
 ::------------------------------ IDEs
 
 echo Install IDEs
@@ -150,6 +156,8 @@ timeout %timeoutValue% && cls
 
 echo Install Docker
 choco install docker-desktop
+choco install putty
+choco install filezilla
 call RefreshEnv.cmd
 
 echo.
